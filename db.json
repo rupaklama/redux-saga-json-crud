@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "name": "john doe",
+      "email": "john@gmail.com",
+      "phone": "97837873445",
+      "address": "UK",
+      "id": 3
+    },
+    {
+      "name": "James",
+      "email": "james@gmail.com",
+      "phone": "98393838887",
+      "address": "USA",
+      "id": 4
+    },
+    {
+      "name": "jenny",
+      "email": "jenny@gmail.com",
+      "phone": "876766688",
+      "address": "Italy",
+      "id": 5
+    },
+    {
+      "name": "Vishal",
+      "email": "vishal@gmail.com",
+      "phone": "878768786",
+      "address": "India",
+      "id": 7
+    },
+    {
+      "name": "julie",
+      "email": "julie12345@gmail.com",
+      "phone": "83787367",
+      "address": "India",
+      "id": 8
+    }
+  ]
+}

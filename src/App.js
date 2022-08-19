@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "./App.css";
 import Header from "./component/Header";
@@ -13,6 +14,8 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ToastContainer position="top-center" />
+
         <Header />
 
         <Routes>

@@ -14,7 +14,7 @@ const initialState = {
 
 const AddEditUser = () => {
   const [formValue, setFormValue] = useState(initialState);
-  const { users } = useSelector(state => state.users);
+  const { users, error } = useSelector(state => state.users);
   const [editMode, setEditMode] = useState(false);
 
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const AddEditUser = () => {
       const singleUser = users.find(item => item.id === Number(id));
       setFormValue({ ...singleUser });
     } else {
-      // setEditMode(false);
+      setEditMode(false);
       setFormValue({ ...initialState });
     }
   }, [id, users]);
@@ -41,13 +41,27 @@ const AddEditUser = () => {
       // editMode === false
       if (!editMode) {
         dispatch(createUserStart(formValue));
-        toast.success("User Added Successfully");
-        setTimeout(() => navigate("/"), 500);
+
+        if (!error) {
+          toast.success("User Added Successfully");
+          setTimeout(() => navigate("/"), 500);
+        }
+
+        if (error) {
+          toast.error("Something went wrong");
+        }
       } else {
         dispatch(updateUserStart({ id, formValue }));
-        setEditMode(false);
-        toast.success("User Updated Successfully");
-        setTimeout(() => navigate("/"), 500);
+
+        if (!error) {
+          setEditMode(false);
+          toast.success("User Updated Successfully");
+          setTimeout(() => navigate("/"), 500);
+        }
+
+        if (error) {
+          toast.error("Something went wrong");
+        }
       }
     }
   };

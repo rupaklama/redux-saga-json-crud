@@ -8,18 +8,11 @@
       "id": 3
     },
     {
-      "name": "James New",
-      "email": "james@gmail.com",
-      "phone": "98393838887",
-      "address": "USA",
+      "name": "Rupak L",
+      "email": "rupaklama@gmail.com",
+      "phone": "344545",
+      "address": "Jersey City",
       "id": 4
-    },
-    {
-      "name": "jenny old",
-      "email": "jenny@gmail.com",
-      "phone": "876766688",
-      "address": "Italy",
-      "id": 5
     }
   ]
 }

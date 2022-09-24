@@ -15,7 +15,8 @@ function* workerOnLoadUsers() {
       yield put(loadUsersSuccess(response.data));
     }
   } catch (err) {
-    yield put(loadUsersError(err.response.data));
+    console.log(err.response);
+    yield put(loadUsersError(err.response.statusText));
   }
 }
 
@@ -33,7 +34,7 @@ function* workerOnCreateUser({ payload }) {
       yield call(workerOnLoadUsers);
     }
   } catch (err) {
-    yield put(createUserError(err.response.data));
+    yield put(createUserError(err.response.statusText));
   }
 }
 
@@ -53,7 +54,7 @@ function* workerOnDeleteUser(userId) {
       yield call(workerOnLoadUsers);
     }
   } catch (err) {
-    yield put(deleteUserError(err.response.data));
+    yield put(deleteUserError(err.response.statusText));
   }
 }
 
@@ -77,7 +78,7 @@ function* workerOnUpdateUser({ payload: { id, formValue } }) {
       yield call(workerOnLoadUsers);
     }
   } catch (err) {
-    yield put(updateUserError(err.response.data));
+    yield put(updateUserError(err.response.statusText));
   }
 }
 

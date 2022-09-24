@@ -22,6 +22,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         users: action.payload,
+        error: "",
       };
 
     // case types.CREATE_USER_SUCCESS:

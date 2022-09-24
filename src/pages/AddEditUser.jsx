@@ -29,7 +29,7 @@ const AddEditUser = () => {
       const singleUser = users.find(item => item.id === Number(id));
       setFormValue({ ...singleUser });
     } else {
-      setEditMode(false);
+      // setEditMode(false);
       setFormValue({ ...initialState });
     }
   }, [id, users]);
@@ -38,6 +38,7 @@ const AddEditUser = () => {
     e.preventDefault();
 
     if (name && email && phone && address) {
+      // editMode === false
       if (!editMode) {
         dispatch(createUserStart(formValue));
         toast.success("User Added Successfully");
@@ -54,11 +55,13 @@ const AddEditUser = () => {
   const onInputChange = e => {
     let { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
+    // setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <MDBValidation className="row g-3" style={{ marginTop: "100px" }} noValidate onSubmit={handleSubmit}>
       <p className="fs-2 fw-bold">{!editMode ? "Add User Detail" : "Update User Detail"}</p>
+
       <div
         style={{
           margin: "auto",
@@ -77,7 +80,9 @@ const AddEditUser = () => {
           validation="Please provide a name"
           invalid
         />
+
         <br />
+
         <MDBInput
           value={email || ""}
           name="email"
@@ -115,6 +120,7 @@ const AddEditUser = () => {
           <MDBBtn style={{ marginRight: "10px" }} type="submit">
             {!editMode ? "Add" : "Update"}
           </MDBBtn>
+
           <MDBBtn onClick={() => navigate("/")} color="danger">
             Go Back
           </MDBBtn>

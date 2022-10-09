@@ -1,9 +1,17 @@
 import { call, fork, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
 import * as types from "./actionTypes";
-import { createUserError, deleteUserError, loadUsersError, loadUsersSuccess, updateUserError } from "./actions";
+import {
+  createUserError,
+  deleteUserError,
+  loadUsersError,
+  loadUsersSuccess,
+  searchUserError,
+  searchUserSuccess,
+  updateUserError,
+} from "./actions";
 
-import { createUserApi, deleteUserApi, loadUsersApi, updateUserApi } from "./api";
+import { createUserApi, deleteUserApi, loadUsersApi, searchUserApi, updateUserApi } from "./api";
 
 // USERS REQUESTS
 function* workerOnLoadUsers() {
@@ -86,7 +94,32 @@ function* watchOnUpdateUser() {
   yield takeLatest(types.UPDATE_USER_START, workerOnUpdateUser);
 }
 
+// SEARCH USER
+function* workerOnSearchUser({ payload: query }) {
+  try {
+    const response = yield call(searchUserApi, query);
+    console.log(response);
+
+    if (response.status === 200) {
+      yield put(searchUserSuccess(response.data));
+    }
+  } catch (err) {
+    console.log(err.response);
+    yield put(searchUserError(err.response.statusText));
+  }
+}
+
+function* watchOnSearchUser() {
+  yield takeEvery(types.SEARCH_USER_START, workerOnSearchUser);
+}
+
 // Fork is to run multiple sagas in the background
-const userSagas = [fork(watchOnLoadUsers), fork(watchOnCreateUser), fork(watchOnDeleteUser), fork(watchOnUpdateUser)];
+const userSagas = [
+  fork(watchOnLoadUsers),
+  fork(watchOnCreateUser),
+  fork(watchOnDeleteUser),
+  fork(watchOnUpdateUser),
+  fork(watchOnSearchUser),
+];
 
 export default userSagas;

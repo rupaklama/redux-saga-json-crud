@@ -13,6 +13,20 @@
       "phone": "344545",
       "address": "Jersey City",
       "id": 4
+    },
+    {
+      "name": "test user",
+      "email": "test@test.com",
+      "phone": "234343433",
+      "address": "test",
+      "id": 5
+    },
+    {
+      "name": "Peter",
+      "email": "peter@gamil.com",
+      "phone": "34084584540894",
+      "address": "usa",
+      "id": 6
     }
   ]
 }

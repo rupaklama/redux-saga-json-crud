@@ -10,3 +10,5 @@ export const updateUserApi = async (userId, userInfo) =>
   await axios.put(`http://localhost:3000/users/${userId}`, userInfo);
 
 export const searchUserApi = async query => await axios.get(`http://localhost:3000/users?q=${query}`);
+
+export const filterUserApi = async value => await axios.get(`http://localhost:3000/users?status=${value}`);

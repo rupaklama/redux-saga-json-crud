@@ -10,7 +10,17 @@ const initialState = {
   email: "",
   phone: "",
   address: "",
+  status: "",
 };
+
+const options = [
+  {
+    label: "Active",
+  },
+  {
+    label: "Inactive",
+  },
+];
 
 const AddEditUser = () => {
   const [formValue, setFormValue] = useState(initialState);
@@ -21,7 +31,7 @@ const AddEditUser = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { name, email, phone, address } = formValue;
+  const { name, email, phone, address, status } = formValue;
 
   useEffect(() => {
     if (id) {
@@ -37,7 +47,7 @@ const AddEditUser = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (name && email && phone && address) {
+    if (name && email && phone && address && status) {
       // editMode === false
       if (!editMode) {
         dispatch(createUserStart(formValue));
@@ -70,6 +80,10 @@ const AddEditUser = () => {
     let { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
     // setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onDropdownChange = e => {
+    setFormValue({ ...formValue, status: e.target.value });
   };
 
   return (
@@ -130,8 +144,20 @@ const AddEditUser = () => {
           invalid
         />
         <br />
+
+        <select style={{ width: "100%", borderRadius: "5px", height: "35px" }} onChange={onDropdownChange}>
+          <option>Please Select Status</option>
+          {options.map((option, i) => (
+            // One of the label is equal to status
+            // The pre-selected option will be displayed first in the drop-down list
+            <option value={option.label || ""} selected={option.label === status} key={"status" + i}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
         <div className="col-12">
-          <MDBBtn style={{ marginRight: "10px" }} type="submit">
+          <MDBBtn style={{ marginRight: "10px", marginTop: "20px" }} type="submit">
             {!editMode ? "Add" : "Update"}
           </MDBBtn>
 

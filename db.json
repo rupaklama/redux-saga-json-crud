@@ -5,28 +5,24 @@
       "email": "john@gmail.com",
       "phone": "97837873445",
       "address": "UK",
-      "id": 3
+      "id": 3,
+      "status": "Active"
     },
     {
       "name": "Rupak L",
       "email": "rupaklama@gmail.com",
       "phone": "344545",
       "address": "Jersey City",
-      "id": 4
+      "id": 4,
+      "status": "Inactive"
     },
     {
-      "name": "test user",
+      "name": "test",
       "email": "test@test.com",
-      "phone": "234343433",
+      "phone": "3493840983093",
       "address": "test",
+      "status": "Active",
       "id": 5
-    },
-    {
-      "name": "Peter",
-      "email": "peter@gamil.com",
-      "phone": "34084584540894",
-      "address": "usa",
-      "id": 6
     }
   ]
 }

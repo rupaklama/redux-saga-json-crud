@@ -4,6 +4,8 @@ import * as types from "./actionTypes";
 import {
   createUserError,
   deleteUserError,
+  filterUserError,
+  filterUserSuccess,
   loadUsersError,
   loadUsersSuccess,
   searchUserError,
@@ -11,7 +13,7 @@ import {
   updateUserError,
 } from "./actions";
 
-import { createUserApi, deleteUserApi, loadUsersApi, searchUserApi, updateUserApi } from "./api";
+import { createUserApi, deleteUserApi, filterUserApi, loadUsersApi, searchUserApi, updateUserApi } from "./api";
 
 // USERS REQUESTS
 function* workerOnLoadUsers() {
@@ -98,19 +100,35 @@ function* watchOnUpdateUser() {
 function* workerOnSearchUser({ payload: query }) {
   try {
     const response = yield call(searchUserApi, query);
-    console.log(response);
 
     if (response.status === 200) {
       yield put(searchUserSuccess(response.data));
     }
   } catch (err) {
-    console.log(err.response);
     yield put(searchUserError(err.response.statusText));
   }
 }
 
 function* watchOnSearchUser() {
-  yield takeEvery(types.SEARCH_USER_START, workerOnSearchUser);
+  yield takeLatest(types.SEARCH_USER_START, workerOnSearchUser);
+}
+
+// FILTER USER
+function* workerOnFilterUser({ payload: value }) {
+  try {
+    const response = yield call(filterUserApi, value);
+    console.log(response);
+
+    if (response.status === 200) {
+      yield put(filterUserSuccess(response.data));
+    }
+  } catch (err) {
+    yield put(filterUserError(err.response.statusText));
+  }
+}
+
+function* watchOnFilterUser() {
+  yield takeLatest(types.FILTER_USER_START, workerOnFilterUser);
 }
 
 // Fork is to run multiple sagas in the background
@@ -120,6 +138,7 @@ const userSagas = [
   fork(watchOnDeleteUser),
   fork(watchOnUpdateUser),
   fork(watchOnSearchUser),
+  fork(watchOnFilterUser),
 ];
 
 export default userSagas;
